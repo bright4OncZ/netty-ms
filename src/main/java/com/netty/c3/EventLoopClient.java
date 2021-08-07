@@ -8,11 +8,9 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringEncoder;
-import lombok.extern.slf4j.Slf4j;
 
 import java.net.InetSocketAddress;
 
-@Slf4j
 public class EventLoopClient {
 
     public static void main(String[] args) throws InterruptedException {
@@ -29,13 +27,12 @@ public class EventLoopClient {
 
         // 使用sync 方法同步处理结果
         channelFuture.sync();
-
-        final Channel channel = channelFuture.channel();
+//        final Channel channel = channelFuture.channel();
 
         channelFuture.addListener(new ChannelFutureListener() {
             @Override
             public void operationComplete(ChannelFuture channelFuture) throws Exception {
-                final Channel channel1 = channelFuture.channel();
+                final Channel channel = channelFuture.channel();
                 channel.writeAndFlush("hello, world");
             }
         });
